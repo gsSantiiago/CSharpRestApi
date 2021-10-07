@@ -6,9 +6,11 @@
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.2" />
 		<PackageReference Include="MongoDB.Driver" Version="2.13.2" />
 		<PackageReference Include="MongoDB.Bson" Version="2.13.2" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	</ItemGroup>
 	<ItemGroup>
 	  <None Remove="Classes\" />
+	  <None Remove="Newtonsoft.Json" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Classes\" />

@@ -6,6 +6,7 @@ using MongoDB.Driver;
 using MongoDB.Bson;
 using CSharpRestApi.Classes;
 using System.Net.Sockets;
+using Newtonsoft.Json;
 
 namespace CSharpRestApi.Services
 {
@@ -35,18 +36,28 @@ namespace CSharpRestApi.Services
             }
         }
 
-        public static bool GetAvailable(DB context, Guid id) {
+        public static string GetAvailable(DB context, Guid id) {
             try
             {
                 Server server = context.Servers.Find(s => s.Id == id).FirstOrDefault();
 
                 using TcpClient client = new(server.IP, server.Port);
 
-                return true;
+                var result = new
+                {
+                    available = true
+                };
+
+                return JsonConvert.SerializeObject(result);
             }
             catch (SocketException)
             {
-                return false;
+                var result = new
+                {
+                    available = false
+                };
+
+                return JsonConvert.SerializeObject(result);
             }
             catch (Exception)
             {
@@ -58,7 +69,6 @@ namespace CSharpRestApi.Services
         {
             try
             {
-                server.Id = Guid.NewGuid();
                 context.Servers.InsertOne(server);
             }
             catch(Exception)

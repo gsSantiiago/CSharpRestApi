@@ -24,9 +24,7 @@ namespace CSharpRestApi.Classes
         {
             get
             {
-                IMongoCollection<Server> servers = Database.GetCollection<Server>("servers");
-
-                return servers;
+                return Database.GetCollection<Server>("servers");
             }
         }
     }

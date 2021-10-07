@@ -34,7 +34,7 @@ namespace CSharpRestApi.Controllers
 
         [Route("~/api/servers/available/{id}")]
         [HttpGet]
-        public ActionResult<bool> GetAvailable(Guid id)
+        public ActionResult<string> GetAvailable(Guid id)
         {
             var server = ServerService.Get(Context, id);
 

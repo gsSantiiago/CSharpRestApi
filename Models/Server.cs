@@ -24,5 +24,9 @@ namespace CSharpRestApi.Models
         [BsonElement("port")]
         [Display(Name = "Porta")]
         public int Port { get; set; }
+
+        [BsonElement("videos")]
+        [Display(Name = "Vídeos")]
+        public Video[] Videos { get; set; }
     }
 }

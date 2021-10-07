@@ -38,3 +38,4 @@
 /Users/guilherme/Projects/CSharpRestApi/bin/Debug/net5.0/runtimes/linux/native/libmongocrypt.so
 /Users/guilherme/Projects/CSharpRestApi/bin/Debug/net5.0/runtimes/osx/native/libmongocrypt.dylib
 /Users/guilherme/Projects/CSharpRestApi/bin/Debug/net5.0/runtimes/win/native/mongocrypt.dll
+/Users/guilherme/Projects/CSharpRestApi/bin/Debug/net5.0/Newtonsoft.Json.dll
