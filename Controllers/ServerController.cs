@@ -13,10 +13,6 @@ namespace CSharpRestApi.Controllers
     {
         private readonly DB Context = new();
 
-        public ServerController()
-        {
-        }
-
         [Route("~/api/servers")]
         [HttpGet]
         public ActionResult<List<Server>> GetAll()
@@ -34,6 +30,18 @@ namespace CSharpRestApi.Controllers
                 return NotFound();
 
             return server;
+        }
+
+        [Route("~/api/servers/available/{id}")]
+        [HttpGet]
+        public ActionResult<bool> GetAvailable(Guid id)
+        {
+            var server = ServerService.Get(Context, id);
+
+            if (server == null)
+                return NotFound();
+
+            return ServerService.GetAvailable(Context, id);
         }
 
         [Route("~/api/server")]

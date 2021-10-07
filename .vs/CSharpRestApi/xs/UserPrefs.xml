@@ -1,9 +1,9 @@
 ﻿<Properties StartupConfiguration="{E378117F-31D7-44EA-84F6-BAB94D0B6760}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Services/ServerService.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/ServerController.cs">
     <Files>
-      <File FileName="Controllers/ServerController.cs" Line="6" Column="1" />
+      <File FileName="Controllers/ServerController.cs" Line="44" Column="41" />
       <File FileName="Models/DB.cs" Line="22" Column="1" />
-      <File FileName="Services/ServerService.cs" Line="13" Column="43" />
+      <File FileName="Services/ServerService.cs" Line="20" Column="29" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -11,11 +11,11 @@
           <Node name="CSharpRestApi" expanded="True">
             <Node name="CSharpRestApi" expanded="True">
               <Node name="Classes" expanded="True" />
-              <Node name="Controllers" expanded="True" />
-              <Node name="Models" expanded="True" />
-              <Node name="Services" expanded="True">
-                <Node name="ServerService.cs" selected="True" />
+              <Node name="Controllers" expanded="True">
+                <Node name="ServerController.cs" selected="True" />
               </Node>
+              <Node name="Models" expanded="True" />
+              <Node name="Services" expanded="True" />
               <Node name="appsettings.json" expanded="True" />
             </Node>
           </Node>
