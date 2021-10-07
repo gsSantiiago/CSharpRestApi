@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using CSharpRestApi.Models;
 using CSharpRestApi.Services;
-using System.Linq.Expressions;
-using MongoDB.Bson;
-using MongoDB.Driver;
+using CSharpRestApi.Classes;
 
 namespace CSharpRestApi.Controllers
 {

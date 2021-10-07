@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using MongoDB.Driver;
 using MongoDB.Bson;
+using CSharpRestApi.Classes;
 
 namespace CSharpRestApi.Services
 {

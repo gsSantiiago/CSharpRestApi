@@ -7,4 +7,10 @@
 		<PackageReference Include="MongoDB.Driver" Version="2.13.2" />
 		<PackageReference Include="MongoDB.Bson" Version="2.13.2" />
 	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="Classes\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Classes\" />
+	</ItemGroup>
 </Project>
