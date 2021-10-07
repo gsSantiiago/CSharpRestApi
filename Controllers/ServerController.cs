@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using CSharpRestApi.Models;
 using CSharpRestApi.Services;
+using System.Linq.Expressions;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace CSharpRestApi.Controllers
 {
@@ -11,22 +13,26 @@ namespace CSharpRestApi.Controllers
     [Route("[controller]")]
     public class ServerController : ControllerBase
     {
+        private readonly DB Context = new();
+
         public ServerController()
         {
         }
 
         [Route("~/api/servers")]
         [HttpGet]
-        public ActionResult<List<Server>> GetAll() =>
-        ServerService.GetAll();
+        public ActionResult<List<Server>> GetAll()
+        {
+            return ServerService.GetAll(Context);
+        }
 
         [Route("~/api/servers/{id}")]
         [HttpGet]
         public ActionResult<Server> Get(Guid id)
         {
-            var server = ServerService.Get(id);
+            var server = ServerService.Get(Context, id);
 
-            if(server == null)
+            if (server == null)
                 return NotFound();
 
             return server;
@@ -36,37 +42,34 @@ namespace CSharpRestApi.Controllers
         [HttpPost]
         public IActionResult Create(Server server)
         {            
-            ServerService.Add(server);
+            ServerService.Add(Context, server);
             return CreatedAtAction(nameof(Create), new { id = server.Id }, server);
         }
 
         [Route("~/api/servers/{id}")]
         [HttpPut]
-        public IActionResult Update(Guid id, Server server)
+        public ActionResult<Server> Update(Guid id, Server server)
         {
-            if (!id.Equals(server.Id))
-                return BadRequest();
+            Server existingServer = ServerService.Get(Context, id);
 
-            var existingServer = ServerService.Get(id);
-
-            if(existingServer is null)
+            if (existingServer is null)
                 return NotFound();
 
-            ServerService.Update(server);           
+            ServerService.Update(Context, id, server);
 
-            return NoContent();
+            return ServerService.Get(Context, id);
         }
 
         [Route("~/api/servers/{id}")]
         [HttpDelete]
         public IActionResult Delete(Guid id)
         {
-            var server = ServerService.Get(id);
+            var server = ServerService.Get(Context, id);
 
             if (server is null)
                 return NotFound();
 
-            ServerService.Delete(id);
+            ServerService.Delete(Context, id);
 
             return NoContent();
         }

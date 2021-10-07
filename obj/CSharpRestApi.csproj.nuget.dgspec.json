@@ -14,7 +14,7 @@
         "outputPath": "/Users/guilherme/Projects/CSharpRestApi/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/guilherme/.nuget/NuGet/NuGet.Config"
+          "/Users/guilherme/.config/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -38,9 +38,17 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "MongoDB.Bson": {
+              "target": "Package",
+              "version": "[2.13.2, )"
+            },
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[2.13.2, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[5.6.3, )"
+              "version": "[6.2.2, )"
             }
           },
           "imports": [

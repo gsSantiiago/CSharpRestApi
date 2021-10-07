@@ -2,50 +2,30 @@ using CSharpRestApi.Models;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using MongoDB.Driver;
+using MongoDB.Bson;
 
 namespace CSharpRestApi.Services
 {
     public static class ServerService
     {
-        static List<Server> Servers { get; }
+        public static List<Server> GetAll(DB context) => context.Servers.Find(_ => true).ToList();
 
-        static ServerService()
-        {
-            Servers = new List<Server>
-            {
-                new Server { Id = Guid.NewGuid(), Name = "Servidor 1" },
-                new Server { Id = Guid.NewGuid(), Name = "Servidor 2" }
-            };
-        }
+        public static Server Get(DB context, Guid id) => context.Servers.Find(s => s.Id == id).FirstOrDefault();
 
-        public static List<Server> GetAll() => Servers;
-
-        public static Server Get(Guid id) => Servers.FirstOrDefault(s => s.Id.Equals(id));
-
-        public static void Add(Server server)
+        public static void Add(DB context, Server server)
         {
             server.Id = Guid.NewGuid();
-            Servers.Add(server);
+            context.Servers.InsertOne(server);
         }
 
-        public static void Delete(Guid id)
+        public static void Delete(DB context, Guid id) => context.Servers.DeleteOne(s => s.Id == id);
+
+        public static void Update(DB context, Guid id, Server server)
         {
-            var server = Get(id);
+            server.Id = id;
 
-            if(server is null)
-                return;
-
-            Servers.Remove(server);
-        }
-
-        public static void Update(Server server)
-        {
-            var index = Servers.FindIndex(s => s.Id == server.Id);
-
-            if(index == -1)
-                return;
-
-            Servers[index] = server;
+            context.Servers.FindOneAndUpdate(s => s.Id == id, server.ToBsonDocument());
         }
     }
 }
