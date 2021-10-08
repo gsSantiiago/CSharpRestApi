@@ -21,5 +21,10 @@ namespace CSharpRestApi.Models
         [BsonElement("sizeInBytes")]
         [Display(Name = "Tamanho em bytes")]
         public long SizeInBytes { get; set; }
+
+        [Required]
+        [BsonElement("createdAt")]
+        [Display(Name = "Criado em")]
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
     }
 }

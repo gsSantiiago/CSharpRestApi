@@ -38,3 +38,4 @@
 /Users/guilherme/Projects/CSharpRestApi/obj/Debug/net5.0/ref/CSharpRestApi.dll
 /Users/guilherme/Projects/CSharpRestApi/obj/Debug/net5.0/CSharpRestApi.pdb
 /Users/guilherme/Projects/CSharpRestApi/obj/Debug/net5.0/CSharpRestApi.genruntimeconfig.cache
+/Users/guilherme/Projects/CSharpRestApi/obj/Debug/net5.0/CSharpRestApi.csproj.AssemblyReference.cache
