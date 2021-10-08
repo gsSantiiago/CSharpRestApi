@@ -22,7 +22,8 @@ Executar o projeto.
 $ dotnet run
 ```
 Ao final do comando o projeto estará rodando em `http://localhost:5000/`.
-## Testes
+
+## Rotas
 Para testar o projeto estão disponíveis as rotas abaixo.
 
 | Ação | Método | Rota |
