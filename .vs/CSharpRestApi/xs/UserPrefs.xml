@@ -1,8 +1,5 @@
 ﻿<Properties StartupConfiguration="{E378117F-31D7-44EA-84F6-BAB94D0B6760}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="README.md">
-    <Files>
-      <File FileName="README.md" Line="42" Column="1" />
-    </Files>
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
