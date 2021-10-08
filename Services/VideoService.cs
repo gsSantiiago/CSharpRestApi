@@ -1,15 +1,18 @@
 ﻿using CSharpRestApi.Models;
 using System;
 using MongoDB.Driver;
-using MongoDB.Bson;
 using CSharpRestApi.Classes;
 using System.Linq;
 using System.Collections.Generic;
+using System.IO;
+using CSharpRestApi.ViewModels;
 
 namespace CSharpRestApi.Services
 {
     public class VideoService
     {
+        private static readonly string VideosPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "server-videos");
+
         public static List<Video> GetAll(DB context, Server server)
         {
             try
@@ -35,15 +38,16 @@ namespace CSharpRestApi.Services
             }
         }
 
-        public static void Add(DB context, Guid serverId, Video video)
+        public static string GetBinary(DB context, Server server, Guid videoId)
         {
             try
             {
-                video.Id = Guid.NewGuid();
+                Video video = server.Videos.Where(v => v.Id == videoId).FirstOrDefault();
 
-                UpdateDefinition<Server> update = Builders<Server>.Update.Push(s => s.Videos, video);
+                string videoName = video.Id + ".mp4";
+                string videoPath = Path.Combine(VideosPath, videoName);
 
-                context.Servers.FindOneAndUpdate(s => s.Id == serverId, update);
+                return Utils.FileToBase64String(videoPath);
             }
             catch (Exception)
             {
@@ -51,12 +55,36 @@ namespace CSharpRestApi.Services
             }
         }
 
-        public static void Update()
+        public static Video Add(DB context, Guid serverId, VideoViewModel videoViewModel)
         {
-            //var filter = Builders<Server>.Filter.Where(u => u.Videos.Any(c => c.Description == contactID));
-            //var update = Builders<Server>.Update.PullFilter(u => u.Videos, c => c.Description == contactID);
+            try
+            {
+                Video video = new() { Id = Guid.NewGuid(), Description = videoViewModel.Description };
 
-            //context.Servers.UpdateOne(filter, update);
+                if (!Directory.Exists(VideosPath))
+                {
+                    Directory.CreateDirectory(VideosPath);
+                }
+
+                string videoName = video.Id + ".mp4";
+                string videoPath = Path.Combine(VideosPath, videoName);
+
+                Utils.Base64StringToFile(videoPath, videoViewModel.Base64);
+
+                FileInfo fileInfo = new(videoPath);
+                video.SizeInBytes = fileInfo.Length;
+
+                UpdateDefinition<Server> update = Builders<Server>.Update.Push(s => s.Videos, video);
+
+                context.Servers.FindOneAndUpdate(s => s.Id == serverId, update);
+
+                return video;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public static void Delete(DB context, Guid serverId, Guid videoId)
@@ -66,6 +94,14 @@ namespace CSharpRestApi.Services
                 UpdateDefinition<Server> delete = Builders<Server>.Update.PullFilter(u => u.Videos, c => c.Id == videoId);
 
                 context.Servers.UpdateOne(s => s.Id == serverId, delete);
+
+                string videoName = videoId + ".mp4";
+                string videoPath = Path.Combine(VideosPath, videoName);
+
+                if(File.Exists(videoPath))
+                {
+                    File.Delete(videoPath);
+                }
             }
             catch (Exception)
             {

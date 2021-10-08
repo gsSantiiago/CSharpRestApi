@@ -1,8 +1,8 @@
 ﻿<Properties StartupConfiguration="{E378117F-31D7-44EA-84F6-BAB94D0B6760}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/VideoController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Services/VideoService.cs">
     <Files>
-      <File FileName="Controllers/VideoController.cs" Line="74" Column="21" />
-      <File FileName="Services/VideoService.cs" Line="25" Column="29" />
+      <File FileName="Controllers/VideoController.cs" Line="16" Column="1" />
+      <File FileName="Services/VideoService.cs" Line="8" Column="32" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -10,12 +10,12 @@
           <Node name="CSharpRestApi" expanded="True">
             <Node name="CSharpRestApi" expanded="True">
               <Node name="Classes" expanded="True" />
-              <Node name="Controllers" expanded="True">
-                <Node name="VideoController.cs" selected="True" />
-              </Node>
+              <Node name="Controllers" expanded="True" />
               <Node name="Models" expanded="True" />
-              <Node name="Services" expanded="True" />
-              <Node name="appsettings.json" expanded="True" />
+              <Node name="Services" expanded="True">
+                <Node name="VideoService.cs" selected="True" />
+              </Node>
+              <Node name="ViewModels" expanded="True" />
             </Node>
           </Node>
         </State>

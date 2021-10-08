@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using CSharpRestApi.ViewModels;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.IdGenerators;
 using System;
@@ -15,5 +16,10 @@ namespace CSharpRestApi.Models
         [BsonElement("description")]
         [Display(Name = "Descrição")]
         public string Description { get; set; }
+
+        [Required]
+        [BsonElement("sizeInBytes")]
+        [Display(Name = "Tamanho em bytes")]
+        public long SizeInBytes { get; set; }
     }
 }

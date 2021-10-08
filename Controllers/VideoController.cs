@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Buffers.Text;
 using System.Collections.Generic;
 using CSharpRestApi.Classes;
 using CSharpRestApi.Models;
 using CSharpRestApi.Services;
+using CSharpRestApi.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CSharpRestApi.Controllers
@@ -42,16 +44,34 @@ namespace CSharpRestApi.Controllers
             return video;
         }
 
+        [Route("~/api/servers/{serverId}/videos/{videoId}/binary")]
+        [HttpGet]
+        public ActionResult<string> GetBinary(Guid serverId, Guid videoId)
+        {
+            Server server = ServerService.Get(Context, serverId);
+
+            if (server is null)
+                return NotFound();
+
+            string base64 = VideoService.GetBinary(Context, server, videoId);
+
+            if (base64 == null)
+                return NotFound();
+
+            return base64;
+        }
+
         [Route("~/api/servers/{serverId}/videos")]
         [HttpPost]
-        public IActionResult Create(Guid serverId, Video video)
+        public IActionResult Create(Guid serverId, VideoViewModel videoViewModel)
         {
             Server server = ServerService.Get(Context, serverId);
 
             if (server == null)
                 return NotFound();
 
-            VideoService.Add(Context, serverId, video);
+            Video video = VideoService.Add(Context, serverId, videoViewModel);
+
             return CreatedAtAction(nameof(Create), new { id = video.Id }, video);
         }
 
@@ -71,7 +91,7 @@ namespace CSharpRestApi.Controllers
 
             VideoService.Delete(Context, serverId, videoId);
 
-            return NoContent();
+            return Ok();
         }
     }
 }
